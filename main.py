@@ -20,43 +20,48 @@ path = './sample_data/data.xlsx'
 
 class ABC():
 
-    def __init__():
-        pass
+    def __init__(self, path):
+        self.upper_boundary = 0
+        self.mid_boundary = 0
+        self.df = pd.read_excel(path)
 
-    def train(path):
-        df = pd.read_excel(path)
-
+    def train(self):
+        df = self.df
         # create an array from consumption data for a given product
         array_x = df['nc'].to_numpy()
 
-        # calculate the top quartiles
+        # calculate the quartiles
         a_type = np.quantile(array_x, .8)
         b_type = np.quantile(array_x, .5)
 
-
-    def categorize():
-        pass
-
+        self.upper_boundary = a_type
+        self.lower_boundary = b_type
 
 
-# print(df)
+    def categorize(self, nc):
+        df = self.df
+        category = '';
+        if nc >= self.upper_boundary: 
+            category = 'A' 
+        elif nc >= self.mid_boundary and nc < self.upper_boundary:
+            category = 'B'
+        else:
+            category = 'C'
+        return f"{category}"
 
-# print(df['nc'])
+
+cat = ABC(path)
+
+# train 
+cat.train()
+
+# classify
+x = cat.categorize(12)
+
+print(x)
 
 
 
-# print(a_type)
-# print(b_type)
-# print(c_type)
-
-# upper = df[df['nc'] > a_type]
-# mid = df[(df['nc'] >= b_type and df['sku'] < b_type)]
-# lower = df[df['nc'] <= b_type]
-
-# print(upper)
-
-# plt.scatter(array_x, array_y)
-# plt.show()
 
 
 
