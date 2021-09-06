@@ -34,8 +34,11 @@ class ABC():
         a_type = np.quantile(array_x, .8)
         b_type = np.quantile(array_x, .5)
 
+        print(a_type)
+        print(b_type)
+
         self.upper_boundary = a_type
-        self.lower_boundary = b_type
+        self.mid_boundary = b_type
 
 
     def categorize(self, nc):
@@ -48,17 +51,6 @@ class ABC():
         else:
             category = 'C'
         return f"{category}"
-
-
-cat = ABC(path)
-
-# train 
-cat.train()
-
-# classify
-x = cat.categorize(12)
-
-print(x)
 
 
 
